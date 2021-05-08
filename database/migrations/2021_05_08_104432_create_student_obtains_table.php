@@ -18,6 +18,7 @@ class CreateStudentObtainsTable extends Migration
             $table->unsignedBigInteger('marking_distribution_id');
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('clo_plo_engagement_id');
             $table->double('parcentage');
             $table->timestamps();
         });
