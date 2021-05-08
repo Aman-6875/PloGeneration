@@ -82,8 +82,8 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="useremail" class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" id="useremail" placeholder="Enter email" required>
+                                            <label for="useremail" class="form-label">ID</label>
+                                            <input type="text" class="form-control" name="email" id="useremail" placeholder="Enter Your ID" required>
                                             <div class="invalid-feedback">
                                                 Please Enter Email
                                             </div>

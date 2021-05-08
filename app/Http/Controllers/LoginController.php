@@ -19,10 +19,10 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-        $user = User::where('email',$request->email)->first();
+        $user = User::where('user_id',$request->email)->first();
         if($user){
             if($user->is_admin==1){
-                if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                if (Auth::attempt(['user_id' => $request->email, 'password' => $request->password])) {
                     return redirect()->intended('/');
                  }
                  else{
@@ -37,7 +37,7 @@ class LoginController extends Controller
     }
     public function register(Request $request){
         $validator = Validator::make($request->all(),[
-            'email'=>'required|email',
+            'email'=>'required',
             'password'=>'required|min:6',
             'first_name'=>'required',
             'last_name'=>'required',
@@ -52,13 +52,13 @@ class LoginController extends Controller
                 'name'=>$request->name,
                 'first_name'=>$request->first_name,
                 'last_name'=>$request->last_name,
-                'email'=>$request->email,
+                'user_id'=>$request->email,
                 'password'=>Hash::make($request->password),
                 'user_type'=>0,
                 'user_role'=>$request->user_role,
                 'is_admin'=>1,
              ];
-             $user = User::where('email',$request->email)->first();
+             $user = User::where('user_id',$request->email)->first();
 
           if($user){
             return back()->with('failed', "Email is already taken. ");
@@ -68,7 +68,7 @@ class LoginController extends Controller
                 $user = new User;
                 $user->first_name = $request->first_name;
                 $user->last_name = $request->last_name;
-                $user->email = $request->email;
+                $user->user_id = $request->email;
                 $user->password = Hash::make($request->password);
                 $user->user_type = 0;
                 $user->user_role = $request->user_role;
