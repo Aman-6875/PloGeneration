@@ -25,13 +25,13 @@
             <div class="card">
                 <div class="card-body">
                     <center>
-                        <h3 class="mb-4">{{ $course_code }}</h3>
+                        <h3 class="mb-4">{{ $course_id }}</h3>
                     </center>
                     <form action="/save-plo-generation" method="POST" enctype="multipart/form-data">
                         @csrf
                         @include('admin.includes.message')
 {{--                        <input type="hidden" name="course_title" value="{{ $course_title }}">--}}
-{{--                        <input type="hidden" name="course_code" value="{{ $course_code }}">--}}
+                        <input type="hidden" name="course_id" value="{{ $course_id }}">
 {{--                        <input type="hidden" name="student_id" value="{{ $student_id }}">--}}
 {{--                        <input type="hidden" name="semester" value="{{ $semester }}">--}}
                         <div class="row">
@@ -84,24 +84,11 @@
                                                  @for ($i=1;$i<10;$i++)
                                                  <tr>
                                                     <th scope="row">
-                                                         <select class="form-select" name="plo[]">
+                                                         <select class="form-select" name="marking_parameters[]">
                                                             <option value="">SELECT</option>
                                                              @foreach($parameters as $parameter)
                                                                  <option  value="{{$parameter->id}}">{{$parameter->name}}</option>
                                                              @endforeach
-{{--                                                            <option  value="Assesment1">Assaignment1</option>--}}
-{{--                                                            <option  value="Assesment2">Assaignment2</option>--}}
-{{--                                                            <option  value="Assesment3">Assaignment3</option>--}}
-{{--                                                            <option value="Quiz1">Quiz1</option>--}}
-{{--                                                            <option value="Quiz2">Quiz2</option>--}}
-{{--                                                            <option value="Quiz3">Quiz3</option>--}}
-{{--                                                            <option value="Quiz4">Quiz4</option>--}}
-{{--                                                            <option value="Lab Test">Lab Test</option>--}}
-{{--                                                            <option value="Class Test">Class Test</option>--}}
-{{--                                                            <option value="Final Exam">Final Exam</option>--}}
-{{--                                                            <option value="Project Report">Project Report</option>--}}
-{{--                                                            <option value="Report">Report</option>--}}
-{{--                                                            <option value="Presentation">Presentation</option>--}}
                                                        </select>
                                                     </th>
                                                     <td>

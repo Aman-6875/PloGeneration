@@ -13,7 +13,7 @@ class AddColumnToCloPloEngagementTable extends Migration
      */
     public function up()
     {
-        Schema::table('clo_plo_engagements', function (Blueprint $table) {
+        Schema::table('marking_distributions', function (Blueprint $table) {
             $table->unsignedBigInteger('marking_parameter_id');
         });
     }
@@ -25,7 +25,7 @@ class AddColumnToCloPloEngagementTable extends Migration
      */
     public function down()
     {
-        Schema::table('clo_plo_engagements', function (Blueprint $table) {
+        Schema::table('marking_distributions', function (Blueprint $table) {
             $table->dropColumn('marking_parameter_id');
         });
     }
