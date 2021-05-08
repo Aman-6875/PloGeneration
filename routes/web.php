@@ -46,6 +46,11 @@ Route::group(['middleware'=>'auth'],function () {
     Route::post('save-plo-generation', 'PloGenerationController@store');
     Route::get('plo-table-search', 'PloGenerationController@ploTableSearch');
     Route::post('get-plo-generation-table', 'PloGenerationController@ploTableDataGet');
+    Route::get('/create/course','CoursesController@create')->name('course.create');
+    Route::post('/create/store','CoursesController@store')->name('course.store');
+
+    Route::get('/enroll/course','CoursesController@showEnroll')->name('enroll.course');
+    Route::post('/enroll/course','CoursesController@enroll')->name('post.enroll.course');
 
 });
 

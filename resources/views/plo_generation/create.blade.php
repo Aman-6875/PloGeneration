@@ -37,12 +37,16 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Choose The Course</span>
                                     </div>
-                                    <select class="form-select" name="course_title">
+                                    <select
+                                        id="course_name"
+                                        class="form-select course-code"
+                                        name="course_name"
+
+                                    >
                                         <option value="">SELECT</option>
-                                        <option value="English">English</option>
-                                        <option value="Literature">Literature</option>
-                                        <option value="Computer Fundamentals">Computer Fundamentals</option>
-                                        <option value="C Programming">C Programming</option>
+                                        @foreach($courses as $course)
+                                            <option value="{{$course->id}}">{{$course->title}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -54,12 +58,14 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Course Code</span>
                                         </div>
-                                        <select class="form-select" name="course_id">
+                                        <select
+                                            id="course_code"
+                                            class="form-select"
+                                            name="course_id">
                                             <option value="">SELECT</option>
-                                            <option value="1">ENG-11</option>
-                                            <option value="2">LIT-11</option>
-                                            <option value="3">CF-11</option>
-                                            <option value="4">C-11</option>
+                                            @foreach($courses as $course)
+                                                <option value="{{$course->id}}">{{$course->course_code}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -88,5 +94,13 @@
     </div>
     <!-- container-fluid -->
 </div>
+    <script>
+        let courses = {!! $courses !!};
+        let element = document.getElementById('course_name');
+        element.onchange = function (e){
+            let course = courses.find((course) => course.id === parseInt(this.value));
+            document.getElementById('course_code').value = course.id
+        }
+    </script>
 
 @endsection

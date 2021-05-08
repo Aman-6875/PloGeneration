@@ -25,7 +25,9 @@
             <div class="card">
                 <div class="card-body">
                     <center>
-                        <h3 class="mb-4">{{ $course_id }}</h3>
+                        <h3 class="mb-4">{{
+                            \App\Courses::find($course_id)->course_code
+                        }}</h3>
                     </center>
                     <form action="/save-plo-generation" method="POST" enctype="multipart/form-data">
                         @csrf

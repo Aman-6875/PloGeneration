@@ -31,21 +31,29 @@
 
         <li class="menu-title" key="t-apps">Actions</li>
         <li>
-            <a href="/create-plo-generation" class="has-arrow waves-effect">
+            <a href="/create-plo-generation" class="waves-effect">
                 <i class="bx bx-file"></i>
                 <span key="t-utility">PLO GENERATION</span>
             </a>
-            <a href="/plo-table-search" class="has-arrow waves-effect">
+            <a href="/plo-table-search" class="waves-effect">
                 <i class="bx bx-file"></i>
                 <span key="t-utility">PLO Table</span>
+            </a>
+            <a href="{{route('course.create')}}" class="waves-effect">
+                <i class="bx bx-file"></i>
+                <span key="t-utility">Create Course</span>
             </a>
         </li>
         @else
         <li class="menu-title" key="t-apps">Actions</li>
         <li>
-            <a href="/plo-table-search" class="has-arrow waves-effect">
+            <a href="/plo-table-search" class="waves-effect">
                 <i class="bx bx-file"></i>
                 <span key="t-utility">PLO Table</span>
+            </a>
+            <a href="{{route('enroll.course')}}" class="waves-effect">
+                <i class="bx bx-file"></i>
+                <span key="t-utility">Enroll Course</span>
             </a>
         </li>
         @endif
