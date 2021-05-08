@@ -15,8 +15,7 @@ class CreateMarkingDistributionsTable extends Migration
     {
         Schema::create('marking_distributions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('plo_id');
-            $table->unsignedBigInteger('clo_id');
+            $table->unsignedBigInteger('clo_plo_engagement_id');
             $table->unsignedBigInteger('course_id');
             $table->double('parcentage');
             $table->timestamps();
