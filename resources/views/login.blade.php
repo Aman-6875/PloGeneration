@@ -64,8 +64,8 @@
                                     <form class="form-horizontal" action="/login-action" method="POST">
                                         @csrf
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
+                                            <label for="username" class="form-label">Id</label>
+                                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter Your Id">
                                         </div>
 
                                         <div class="mb-3">
