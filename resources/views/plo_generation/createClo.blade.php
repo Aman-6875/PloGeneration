@@ -24,15 +24,16 @@
         <div class="row">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">{{ $course_code }}</h4>
-
+                    <center>
+                        <h3 class="mb-4">{{ $course_id }}</h3>
+                    </center>
                     <form action="/save-plo-generation" method="POST" enctype="multipart/form-data">
                         @csrf
                         @include('admin.includes.message')
-                        <input type="hidden" name="course_title" value="{{ $course_title }}">
-                        <input type="hidden" name="course_code" value="{{ $course_code }}">
-                        <input type="hidden" name="student_id" value="{{ $student_id }}">
-                        <input type="hidden" name="semester" value="{{ $semester }}">
+{{--                        <input type="hidden" name="course_title" value="{{ $course_title }}">--}}
+                        <input type="hidden" name="course_id" value="{{ $course_id }}">
+{{--                        <input type="hidden" name="student_id" value="{{ $student_id }}">--}}
+{{--                        <input type="hidden" name="semester" value="{{ $semester }}">--}}
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="card">
@@ -44,9 +45,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Course Learning Outcome</th>
-                                                        <th>CLO 1</th>
-                                                        <th>CLO 2</th>
-                                                        <th>CLO 3</th>
+                                                        @foreach($clos as $clo)
+                                                            <th>{{$clo->name}}</th>
+                                                        @endforeach
                                                         <th></th>
                                                     </tr>
                                                 </thead>
@@ -56,28 +57,25 @@
                                                         <td>
                                                             <select class="form-select" name="col_one_plo">
                                                                 <option value="">SELECT PLO</option>
-                                                                @for ($i=1;$i<=10;$i++)
-                                                                <option value="PLO {{ $i }}">PLO {{ $i }}</option>
-
-                                                                @endfor
+                                                                @foreach ($plos as $plo)
+                                                                    <option value="{{$plo->id}}">{{$plo->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </td>
                                                         <td>
                                                             <select class="form-select" name="col_two_plo">
                                                                 <option value="">SELECT PLO</option>
-                                                                @for ($i=1;$i<=10;$i++)
-                                                                <option value="PLO {{ $i }}">PLO {{ $i }}</option>
-
-                                                                @endfor
+                                                                @foreach ($plos as $plo)
+                                                                    <option value="{{$plo->id}}">{{$plo->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </td>
                                                         <td>
                                                             <select class="form-select" name="col_three_plo">
                                                                 <option value="">SELECT PLO</option>
-                                                                @for ($i=1;$i<=10;$i++)
-                                                                <option value="PLO {{ $i }}">PLO {{ $i }}</option>
-
-                                                                @endfor
+                                                                  @foreach ($plos as $plo)
+                                                                    <option value="{{$plo->id}}">{{$plo->name}}</option>
+                                                                  @endforeach
                                                             </select>
                                                         </td>
                                                         <td>Weightage %</td>
@@ -86,33 +84,45 @@
                                                  @for ($i=1;$i<10;$i++)
                                                  <tr>
                                                     <th scope="row">
-                                                         <select class="form-select" name="plo[]">
+                                                         <select class="form-select" name="marking_parameters[]">
                                                             <option value="">SELECT</option>
-                                                            <option  value="Assesment1">Assaignment1</option>
-                                                            <option  value="Assesment2">Assaignment2</option>
-                                                            <option  value="Assesment3">Assaignment3</option>
-                                                            <option value="Quiz1">Quiz1</option>
-                                                            <option value="Quiz2">Quiz2</option>
-                                                            <option value="Quiz3">Quiz3</option>
-                                                            <option value="Quiz4">Quiz4</option>
-                                                            <option value="Lab Test">Lab Test</option>
-                                                            <option value="Class Test">Class Test</option>
-                                                            <option value="Final Exam">Final Exam</option>
-                                                            <option value="Project Report">Project Report</option>
-                                                            <option value="Report">Report</option>
-                                                            <option value="Presentation">Presentation</option>
+                                                             @foreach($parameters as $parameter)
+                                                                 <option  value="{{$parameter->id}}">{{$parameter->name}}</option>
+                                                             @endforeach
                                                        </select>
                                                     </th>
                                                     <td>
-                                                        <input class="form-control" type="number" name="col_one_input[]">
+                                                        <input
+                                                            class="form-control"
+                                                            type="number"
+                                                            name="col_one_input[]"
+                                                            id="mark-clo-one-{{$i}}"
+                                                            onchange="checkWeightage({{$i}})">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="number" name="col_two_input[]">
+                                                        <input
+                                                            class="form-control"
+                                                            type="number"
+                                                            id="mark-clo-two-{{$i}}"
+                                                            name="col_two_input[]"
+                                                            onchange="checkWeightage({{$i}})">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="number" name="col_three_input[]">
+                                                        <input
+                                                            class="form-control"
+                                                            type="number"
+                                                            id="mark-clo-three-{{$i}}"
+                                                            name="col_three_input[]"
+                                                            onchange="checkWeightage({{$i}})">
                                                     </td>
-                                                    <td><input class="form-control" type="number" name="weightage[]"></td>
+                                                    <td>
+                                                        <input
+                                                            class="form-control"
+                                                            type="number"
+                                                            id="weightage-{{$i}}"
+                                                            onchange="calculateTotal()"
+                                                            name="weightage[]">
+                                                    </td>
                                                 </tr>
                                                  @endfor
 
@@ -123,15 +133,37 @@
                                                              Total %
                                                         </th>
                                                         <td>
-                                                            <input class="form-control" type="text" name="col_one_input[]" readonly>
+                                                            <input
+                                                                id="total-clo-one"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="col_one_input[]"
+                                                                readonly>
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="text" name="col_two_input[]" readonly>
+                                                            <input
+                                                                id="total-clo-two"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="col_two_input[]"
+                                                                readonly>
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="text" name="col_three_input[]" readonly>
+                                                            <input
+                                                                id="total-clo-three"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="col_three_input[]"
+                                                                readonly>
                                                         </td>
-                                                        <td><input class="form-control" type="text" name="weightage[]" readonly></td>
+                                                        <td>
+                                                            <input
+                                                                id="total-weightage"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="weightage[]"
+                                                                readonly>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -142,11 +174,11 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-end">
+                        <div class="row justify-content-center">
                             <div class="col-sm-9">
-                                <div>
-                                    <button type="submit" class="btn btn-primary w-md">Save</button>
-                                </div>
+                                <center>
+                                    <button type="submit" class="btn btn-primary w-50">Save</button>
+                                </center>
                             </div>
                         </div>
                     </form>
@@ -158,5 +190,61 @@
     </div>
     <!-- container-fluid -->
 </div>
+<script>
+    function checkWeightage(index)
+    {
+        let weightage = document.getElementById('weightage-'+index);
+        if (!weightage.value.length) alert('Enter the weightage first');
+        let clo_one_plo_value = document.getElementById('mark-clo-one-'+index);
+        let clo_two_plo_value = document.getElementById('mark-clo-two-'+index);
+        let clo_three_plo_value = document.getElementById('mark-clo-three-'+index);
+
+        if (clo_one_plo_value.value.length > 0 &&
+            clo_two_plo_value.value.length > 0 &&
+            clo_three_plo_value.value.length > 0)
+        {
+            if ((parseFloat(clo_one_plo_value.value)+
+                parseFloat(clo_two_plo_value.value)+
+                parseFloat(clo_three_plo_value.value)) !== parseFloat(weightage.value))
+            {
+                alert('Invalid entry')
+                clo_one_plo_value.value = ''
+                clo_two_plo_value.value = ''
+                clo_three_plo_value.value = ''
+            }
+        }
+        calculateTotal();
+
+    }
+
+    function calculateTotal()
+    {
+        let total_clo_one_plo = 0;
+        let total_clo_two_plo = 0;
+        let total_clo_three_plo = 0;
+        let total_weightage = 0;
+        for(let index = 1; index < 10; index++){
+            let weightage = document.getElementById('weightage-'+index);
+            let clo_one_plo_value = document.getElementById('mark-clo-one-'+index);
+            let clo_two_plo_value = document.getElementById('mark-clo-two-'+index);
+            let clo_three_plo_value = document.getElementById('mark-clo-three-'+index);
+            if (!isNaN(parseFloat(clo_one_plo_value.value)))
+                total_clo_one_plo += parseFloat(clo_one_plo_value.value)
+            if (!isNaN(parseFloat(clo_two_plo_value.value)))
+                total_clo_two_plo += parseFloat(clo_two_plo_value.value)
+            if (!isNaN(parseFloat(clo_three_plo_value.value)))
+                total_clo_three_plo += parseFloat(clo_three_plo_value.value)
+            if (!isNaN(parseFloat(weightage.value)))
+                total_weightage += parseFloat(weightage.value)
+
+        }
+
+        document.getElementById('total-clo-one').value = total_clo_one_plo
+        document.getElementById('total-clo-two').value = total_clo_two_plo
+        document.getElementById('total-clo-three').value = total_clo_three_plo
+        document.getElementById('total-weightage').value = total_weightage
+
+    }
+</script>
 
 @endsection

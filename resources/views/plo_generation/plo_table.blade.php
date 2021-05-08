@@ -21,61 +21,61 @@
         </div>
         <!-- end page title -->
 
-        <div class="row">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">{{ $course_code }}</h4>
+{{--        <div class="row">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <h4 class="card-title mb-4">{{ $course_code }}</h4>--}}
 
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="card">
-                                <div class="card-body">
+{{--                    <div class="row">--}}
+{{--                        <div class="col-xl-12">--}}
+{{--                            <div class="card">--}}
+{{--                                <div class="card-body">--}}
 
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered border-primary mb-0">
+{{--                                    <div class="table-responsive">--}}
+{{--                                        <table class="table table-bordered border-primary mb-0">--}}
 
-                                            <thead>
-                                                <tr>
-                                                    <th>Student ID</th>
+{{--                                            <thead>--}}
+{{--                                                <tr>--}}
+{{--                                                    <th>Student ID</th>--}}
 
-                                                    @for ($i=1;$i<=10;$i++)
-                                                    <th>PLO {{$i}}</th>
-                                                    @endfor
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($datas as $data)
-                                                <tr>
+{{--                                                    @for ($i=1;$i<=10;$i++)--}}
+{{--                                                    <th>PLO {{$i}}</th>--}}
+{{--                                                    @endfor--}}
+{{--                                                </tr>--}}
+{{--                                            </thead>--}}
+{{--                                            <tbody>--}}
+{{--                                                @foreach ($datas as $data)--}}
+{{--                                                <tr>--}}
 
-                                                    <td>
-                                                        {{ $data->student_id }}
-                                                     </td>
-                                                     @for ($i=1;$i<=10;$i++)
-                                                     <td>
+{{--                                                    <td>--}}
+{{--                                                        {{ $data->student_id }}--}}
+{{--                                                     </td>--}}
+{{--                                                     @for ($i=1;$i<=10;$i++)--}}
+{{--                                                     <td>--}}
 
-                                                         @if ($data->col_one_plo=='PLO '.$i)
-                                                           {{ $data->col_one_plo_avg }}
-                                                         @elseif ($data->col_two_plo=='PLO '.$i)
-                                                           {{ $data->col_two_plo_avg }}
-                                                         @elseif ($data->col_three_plo=='PLO '.$i)
-                                                           {{ $data->col_three_plo_avg }}
-                                                         @endif
+{{--                                                         @if ($data->col_one_plo=='PLO '.$i)--}}
+{{--                                                           {{ $data->col_one_plo_avg }}--}}
+{{--                                                         @elseif ($data->col_two_plo=='PLO '.$i)--}}
+{{--                                                           {{ $data->col_two_plo_avg }}--}}
+{{--                                                         @elseif ($data->col_three_plo=='PLO '.$i)--}}
+{{--                                                           {{ $data->col_three_plo_avg }}--}}
+{{--                                                         @endif--}}
 
-                                                     </td>
-                                                     @endfor
-
-
-                                                </tr>
-                                                @endforeach
+{{--                                                     </td>--}}
+{{--                                                     @endfor--}}
 
 
+{{--                                                </tr>--}}
+{{--                                                @endforeach--}}
 
 
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+
+
+{{--                                            </tbody>--}}
+{{--                                        </table>--}}
+{{--                                    </div>--}}
 
                                 </div>
                                 <canvas id="marksChart" width="600" height="400"></canvas>

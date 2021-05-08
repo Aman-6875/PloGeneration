@@ -11,7 +11,7 @@ class PLOSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i <= 3; $i++){
+        for($i = 1; $i <= 10; $i++){
             \App\Plo::create([
                 'name' => 'PLO'.$i
             ]);

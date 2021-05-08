@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Clo;
 use App\CloGeneration;
+use App\CloPloEngagement;
+use App\MarkingDistribution;
+use App\MarkingParameter;
+use App\Plo;
 use App\PloGeneration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PloGenerationController extends Controller
 {
@@ -29,21 +35,94 @@ class PloGenerationController extends Controller
     }
     public function createCloGeneration(Request $request)
     {
-
+        $parameters = MarkingParameter::all();
+        $clos = Clo::all();
+        $plos = Plo::all();
         return view('plo_generation.createClo')
-        ->with('course_code',$request->course_code)
-        ->with('student_id',$request->student_id)
-        ->with('semester',$request->semester)
-        ->with('course_title',$request->course_title);
+        ->with('course_id',$request->course_id)
+        ->with('clos',$clos)
+        ->with('plos',$plos)
+        ->with('parameters',$parameters);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request){
+        $payloads = $this->markDistributionSanitizer($request->all());
+        DB::beginTransaction();
+        try {
+            foreach ($payloads as $payload)
+            {
+                $plo_clo_engagement = CloPloEngagement::create([
+                    'course_id' => $payload['course_id'],
+                    'clo_id' => $payload['clo_id'],
+                    'plo_id' => $payload['plo_id']
+                ]);
+                for($i = 0; $i < 9; $i++){
+                    if ($payload['marking_parameter'][$i] != null){
+                        MarkingDistribution::create([
+                            'clo_plo_engagement_id' => $plo_clo_engagement->id,
+                            'course_id' => $payload['course_id'],
+                            'marking_parameter_id' => $payload['marking_parameter'][$i],
+                            'parcentage' => $payload['input_number'][$i] == null ? 0 : $payload['input_number'][$i]
+                        ]);
+                    }
+                }
+            }
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            dd($exception);
+        }
+        return redirect()->to('/create-plo-generation')->with('success','Successfully Data inserted');
+    }
+
+    public function markDistributionSanitizer($request)
+    {
+        $payload_container = [];
+        unset($request['col_one_input'][count($request['col_one_input'])-1]);
+        unset($request['col_two_input'][count($request['col_two_input'])-1]);
+        unset($request['col_three_input'][count($request['col_three_input'])-1]);
+        unset($request['weightage'][count($request['weightage'])-1]);
+        for ($j = 0; $j < 9 ; $j++){
+            if ($request['col_one_plo'] != null){
+                $payload_container[] = [
+                    'course_id' => $request['course_id'],
+                    'clo_id' => 1,
+                    'plo_id' => $request['col_one_plo'],
+                    'marking_parameter' => $request['marking_parameters'],
+                    'input_number' => $request['col_one_input'],
+                ];
+            }
+            if ($request['col_two_plo'] != null){
+                $payload_container[] = [
+                    'course_id' => $request['course_id'],
+                    'clo_id' => 2,
+                    'plo_id' => $request['col_two_plo'],
+                    'marking_parameter' => $request['marking_parameters'],
+                    'input_number' => $request['col_two_input'],
+                ];
+            }
+            if ($request['col_three_plo'] != null){
+                $payload_container[] = [
+                    'course_id' => $request['course_id'],
+                    'clo_id' => 3,
+                    'plo_id' => $request['col_three_plo'],
+                    'marking_parameter' => $request['marking_parameters'],
+                    'input_number' => $request['col_three_input'],
+                ];
+            }
+            return $payload_container;
+        }
+
+    }
+
+
+    public function storeOld(Request $request)
     {
        //return $request->all();
         unset($request['_token']);
