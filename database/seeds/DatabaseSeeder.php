@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CLOSeeder::class);
         $this->call(PLOSeeder::class);
         $this->call(MarkingParameterSeeder::class);
-//         $this->call(UserSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Clo;
 use App\CloGeneration;
+use App\MarkingParameter;
+use App\Plo;
 use App\PloGeneration;
 use Illuminate\Http\Request;
 
@@ -29,12 +32,14 @@ class PloGenerationController extends Controller
     }
     public function createCloGeneration(Request $request)
     {
-
+        $parameters = MarkingParameter::all();
+        $clos = Clo::all();
+        $plos = Plo::all();
         return view('plo_generation.createClo')
         ->with('course_code',$request->course_code)
-        ->with('student_id',$request->student_id)
-        ->with('semester',$request->semester)
-        ->with('course_title',$request->course_title);
+        ->with('clos',$clos)
+        ->with('plos',$plos)
+        ->with('parameters',$parameters);
     }
 
     /**

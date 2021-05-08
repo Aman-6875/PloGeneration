@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware'=>'auth'],function () {
-    Route::get('/', 'HomeController@index');
+//    Route::get('/', 'HomeController@index');
     //user
     Route::get('/create-user', 'HomeController@createUser');
     Route::get('/edit-user/{id}', 'HomeController@editUser');
