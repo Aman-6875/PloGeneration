@@ -133,6 +133,7 @@
                                                             class="form-control"
                                                             type="number"
                                                             id="weightage-{{$i}}"
+                                                            onchange="calculateTotal()"
                                                             name="weightage[]">
                                                     </td>
                                                 </tr>
@@ -145,15 +146,37 @@
                                                              Total %
                                                         </th>
                                                         <td>
-                                                            <input class="form-control" type="text" name="col_one_input[]" readonly>
+                                                            <input
+                                                                id="total-clo-one"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="col_one_input[]"
+                                                                readonly>
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="text" name="col_two_input[]" readonly>
+                                                            <input
+                                                                id="total-clo-two"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="col_two_input[]"
+                                                                readonly>
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="text" name="col_three_input[]" readonly>
+                                                            <input
+                                                                id="total-clo-three"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="col_three_input[]"
+                                                                readonly>
                                                         </td>
-                                                        <td><input class="form-control" type="text" name="weightage[]" readonly></td>
+                                                        <td>
+                                                            <input
+                                                                id="total-weightage"
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="weightage[]"
+                                                                readonly>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -164,11 +187,11 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-end">
+                        <div class="row justify-content-center">
                             <div class="col-sm-9">
-                                <div>
-                                    <button type="submit" class="btn btn-primary w-md">Save</button>
-                                </div>
+                                <center>
+                                    <button type="submit" class="btn btn-primary w-50">Save</button>
+                                </center>
                             </div>
                         </div>
                     </form>
@@ -203,6 +226,36 @@
                 clo_three_plo_value.value = ''
             }
         }
+        calculateTotal();
+
+    }
+
+    function calculateTotal()
+    {
+        let total_clo_one_plo = 0;
+        let total_clo_two_plo = 0;
+        let total_clo_three_plo = 0;
+        let total_weightage = 0;
+        for(let index = 1; index < 10; index++){
+            let weightage = document.getElementById('weightage-'+index);
+            let clo_one_plo_value = document.getElementById('mark-clo-one-'+index);
+            let clo_two_plo_value = document.getElementById('mark-clo-two-'+index);
+            let clo_three_plo_value = document.getElementById('mark-clo-three-'+index);
+            if (!isNaN(parseFloat(clo_one_plo_value.value)))
+                total_clo_one_plo += parseFloat(clo_one_plo_value.value)
+            if (!isNaN(parseFloat(clo_two_plo_value.value)))
+                total_clo_two_plo += parseFloat(clo_two_plo_value.value)
+            if (!isNaN(parseFloat(clo_three_plo_value.value)))
+                total_clo_three_plo += parseFloat(clo_three_plo_value.value)
+            if (!isNaN(parseFloat(weightage.value)))
+                total_weightage += parseFloat(weightage.value)
+
+        }
+
+        document.getElementById('total-clo-one').value = total_clo_one_plo
+        document.getElementById('total-clo-two').value = total_clo_two_plo
+        document.getElementById('total-clo-three').value = total_clo_three_plo
+        document.getElementById('total-weightage').value = total_weightage
 
     }
 </script>
