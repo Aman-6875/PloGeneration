@@ -37,20 +37,6 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Choose The Course</span>
                                     </div>
-<<<<<<< HEAD
-                                   <select
-                                            id="course_name"
-                                            class="form-select"
-                                            name="course_name"
-
-                                        >
-                                            <option value="">SELECT</option>
-                                            @foreach($courses as $course)
-                                                <option value="{{$course->id}}">{{$course->title}}</option>
-                                            @endforeach
-                                        </select>
-
-=======
                                     <select
                                         id="course_name"
                                         class="form-select"
@@ -62,7 +48,6 @@
                                             <option value="{{$course->id}}">{{$course->title}}</option>
                                         @endforeach
                                     </select>
->>>>>>> 95efb9ae677d96c7f1091d162d072d7924a0f7e7
                                 </div>
                             </div>
                         </div>
