@@ -39,7 +39,7 @@
                                     </div>
                                     <select
                                         id="course_name"
-                                        class="form-select course-code"
+                                        class="form-select"
                                         name="course_name"
 
                                     >

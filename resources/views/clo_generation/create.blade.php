@@ -77,7 +77,12 @@
                                                     <td>
 
                                                         @foreach ($datas as $data)
-                                                            <input class="form-control" type="number"name="marks[]"><br>
+                                                            <input
+                                                                id="clo-{{$student->id}}-{{$data['clo_id']}}"
+                                                                class="form-control"
+                                                                type="number"
+                                                                name="marks[]"
+                                                            onchange="adjustTotal({{$student->id}},{{$data['clo_id']}})"><br>
                                                             <input class="form-control" type="hidden"name="clo_id[]" value="{{$data['clo_id']}}">
                                                             <input class="form-control" type="hidden"name="plo_id[]" value="{{$data['plo_id']}}">
                                                             <input class="form-control" type="hidden"name="course_id" value="{{ $data['course_id'] }}">
@@ -87,11 +92,17 @@
                                                                 $i++;
                                                             @endphp
                                                         @endforeach
-
                                                     </td>
                                                     @endif
                                                     @endforeach
-
+                                                     <td>
+                                                         @foreach ($datas as $d)
+                                                         <input
+                                                             class="form-control"
+                                                             id="total-{{$student->id}}-{{$d['clo_id']}}"
+                                                             type="number" readonly><br>
+                                                         @endforeach
+                                                     </td>
                                                 </tr>
                                                  @endforeach
 
@@ -125,5 +136,14 @@
     <!-- container-fluid -->
 </div>
 
-
+<script>
+    function adjustTotal(student_id,id){
+        let element_value = document.getElementById('clo-'+student_id+'-'+id)
+        let element_total = document.getElementById('total-'+student_id+'-'+id)
+        let total_value = parseFloat(element_total.value)
+        if (isNaN(total_value)) total_value = 0
+        total_value+= parseFloat(element_value.value)
+        element_total.value = total_value
+    }
+</script>
 @endsection
