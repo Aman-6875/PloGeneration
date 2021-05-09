@@ -51,6 +51,7 @@ Route::group(['middleware'=>'auth'],function () {
 
     Route::get('/enroll/course','CoursesController@showEnroll')->name('enroll.course');
     Route::post('/enroll/course','CoursesController@enroll')->name('post.enroll.course');
+    Route::post('/save-clo-generation','PloGenerationController@CloSave');
 
 });
 

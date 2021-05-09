@@ -249,6 +249,7 @@ class PloGenerationController extends Controller
     }
     public function ploTableDataGet(Request $request)
     {
+       // return $request->all();
 
         $i=0;
         $j=0;
@@ -270,7 +271,8 @@ class PloGenerationController extends Controller
         $total8=0;
         $total9=0;
         $total10=0;
-         $ploData = MarksWithCloPlo::where('course_id',2)->where('student_id','zunuqeby@mailinator.com')->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->select('marks_with_clo_plos.*','plos.name')->get();
+        $id = Auth::user()->user_id;
+        $ploData = MarksWithCloPlo::where('course_id',$request->course_code)->where('student_id',$id)->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->select('marks_with_clo_plos.*','plos.name')->get();
         //return $request->course_code;
         foreach($ploData as $data){
             if($data->plo_id!=null){
@@ -374,10 +376,10 @@ class PloGenerationController extends Controller
 
 
 
-        $data = PloGeneration::where('course_code',$request->course_code)->get();
-
+    //   return  $data = PloGeneration::where('course_code',$request->course_code)->get();
+         $total3;
         return view('plo_generation.plo_table')
-        ->with('datas',$data)
+
         ->with('ploData',$ploData)
         ->with('avg1',$avg1)
         ->with('avg2',$avg2)
@@ -389,14 +391,24 @@ class PloGenerationController extends Controller
         ->with('avg8',$avg8)
         ->with('avg9',$avg9)
         ->with('avg10',$avg10)
+        ->with('total1',$total1)
+        ->with('total2',$total2)
+        ->with('total3',$total3)
+        ->with('total4',$total4)
+        ->with('total5',$total5)
+        ->with('total6',$total6)
+        ->with('total7',$total7)
+        ->with('total8',$total8)
+        ->with('total9',$total9)
+        ->with('total10',$total10)
 
         ->with('course_code',$request->course_code);
 
     }
     public function Clocreate($data)
     {
-        dd($data);
-        //$data = PloGeneration::where('course_code',$request->course_code)->get();
+        // dd($data);
+        // $data = PloGeneration::where('course_code',$request->course_code)->get();
 
         return view('clo_generation.create');
 

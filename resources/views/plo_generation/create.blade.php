@@ -37,17 +37,18 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Choose The Course</span>
                                     </div>
-                                    <select
-                                        id="course_name"
-                                        class="form-select course-code"
-                                        name="course_name"
+                                   <select
+                                            id="course_name"
+                                            class="form-select"
+                                            name="course_name"
 
-                                    >
-                                        <option value="">SELECT</option>
-                                        @foreach($courses as $course)
-                                            <option value="{{$course->id}}">{{$course->title}}</option>
-                                        @endforeach
-                                    </select>
+                                        >
+                                            <option value="">SELECT</option>
+                                            @foreach($courses as $course)
+                                                <option value="{{$course->id}}">{{$course->title}}</option>
+                                            @endforeach
+                                        </select>
+
                                 </div>
                             </div>
                         </div>

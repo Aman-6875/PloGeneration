@@ -20,6 +20,7 @@
             </div>
         </div>
         <!-- end page title -->
+        {{-- @dd($datas) --}}
 
         <div class="row">
             <div class="card">

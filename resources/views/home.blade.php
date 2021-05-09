@@ -22,35 +22,58 @@
             <!-- end page title -->
 
             <div class="row">
-                <div class="col-xl-4">
-                    <div class="card overflow-hidden">
-                        <div class="bg-primary bg-soft">
-                            <div class="row">
-                                <div class="col-7">
-                                    <div class="text-primary p-3">
-                                        <h5 class="text-primary">Welcome Back !</h5>
-                                        <h5 class="font-size-15 text-truncate">{{ Auth::user()->name }}</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">PLO GENERATION</h4>
 
+                        <form action="/get-plo-generation-table" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @include('admin.includes.message')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row mb-4">
+                                        <label for="horizontal-email-input" class="col-sm-3 col-form-label">Choose Course Code</label>
+                                        <div class="col-sm-6">
+                                            <select
+
+                                                class="form-select course-code"
+                                                name="course_code">
+                                                <option value="">SELECT</option>
+                                                @php
+                                                    $courses = App\Courses::all();
+                                                @endphp
+                                                @foreach($courses as $course)
+                                                    <option value="{{$course->id}}">{{$course->course_code}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-5 align-self-end">
-                                    <img src="/assets/images/profile-img.png" alt="" class="img-fluid">
+                            </div>
+
+
+
+
+
+
+                            <div class="row justify-content-end">
+                                <div class="col-sm-8">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary w-md">Report</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="row">
-
-                            </div>
-                        </div>
+                        </form>
                     </div>
-
+                    <!-- end card body -->
                 </div>
 
             </div>
             <!-- end row -->
             <br><br>
+            <div class="row">
 
+            </div>
 
         </div>
         <!-- container-fluid -->
