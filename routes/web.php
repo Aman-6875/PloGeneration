@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware'=>'auth'],function () {
-//    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
     //user
     Route::get('/create-user', 'HomeController@createUser');
     Route::get('/edit-user/{id}', 'HomeController@editUser');
@@ -46,6 +46,10 @@ Route::group(['middleware'=>'auth'],function () {
     Route::post('save-plo-generation', 'PloGenerationController@store');
     Route::get('plo-table-search', 'PloGenerationController@ploTableSearch');
     Route::post('get-plo-generation-table', 'PloGenerationController@ploTableDataGet');
+    //clo
+    Route::get('add-clo-generation', 'PloGenerationController@Clocreate');
+    Route::post('save-clo-generation', 'PloGenerationController@CloSave');
+
 
 });
 

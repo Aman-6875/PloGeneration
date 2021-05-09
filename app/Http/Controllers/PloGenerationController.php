@@ -7,6 +7,7 @@ use App\CloGeneration;
 use App\CloPloEngagement;
 use App\MarkingDistribution;
 use App\MarkingParameter;
+use App\MarksWithCloPlo;
 use App\Plo;
 use App\PloGeneration;
 use Illuminate\Http\Request;
@@ -78,7 +79,9 @@ class PloGenerationController extends Controller
             DB::rollBack();
             dd($exception);
         }
-        return redirect()->to('/create-plo-generation')->with('success','Successfully Data inserted');
+        return view('clo_generation.create')
+        ->with('success','Successfully Data inserted')
+        ->with('datas',$payloads);
     }
 
     public function markDistributionSanitizer($request)
@@ -239,12 +242,184 @@ class PloGenerationController extends Controller
     }
     public function ploTableDataGet(Request $request)
     {
+
+        $i=0;
+        $j=0;
+        $k=0;
+        $l=0;
+        $m=0;
+        $n=0;
+        $o=0;
+        $p=0;
+        $q=0;
+        $r=0;
+        $total1=0;
+        $total2=0;
+        $total3=0;
+        $total4=0;
+        $total5=0;
+        $total6=0;
+        $total7=0;
+        $total8=0;
+        $total9=0;
+        $total10=0;
+         $ploData = MarksWithCloPlo::where('course_id',2)->where('student_id','zunuqeby@mailinator.com')->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->select('marks_with_clo_plos.*','plos.name')->get();
         //return $request->course_code;
+        foreach($ploData as $data){
+            if($data->plo_id!=null){
+                if($data->plo_id==1){
+                    $total1 = $total1 +$data->mark;
+                    $i++;
+                }
+                elseif($data->plo_id==2){
+                    $total2 = $total2 + $data->mark;
+                    $j++;
+                }
+                elseif($data->plo_id==3){
+                    $total3 = $total3 +$data->mark;
+                    $k++;
+                }
+                elseif($data->plo_id==4){
+                    $total4 = $total4 +$data->mark;
+                    $l++;
+                }
+                elseif($data->plo_id==5){
+                    $total5 = $total5 + $data->mark;
+                    $m++;
+                }
+                elseif($data->plo_id==6){
+                    $total6 = $total6 + $data->mark;
+                    $n++;
+                }
+                elseif($data->plo_id==7){
+                    $total7 = $total7 + $data->mark;
+                    $o++;
+                }
+                elseif($data->plo_id==8){
+                    $total8 = $total8 +$data->mark;
+                    $p++;
+                }
+                elseif($data->plo_id==9){
+                    $total9 = $total9 +$data->mark;
+                    $q++;
+                }
+                elseif($data->plo_id==10){
+                    $total10 = $total10 + $data->mark;
+                    $r++;
+                }
+
+            }
+
+        }
+        if($total1!=0){
+            $avg1 = $total1/$i;
+        }else{
+            $avg1 = 0;
+        }
+        if($total2!=0){
+            $avg2 = $total1/$j;
+        }else{
+            $avg2 = 0;
+        }
+        if($total3!=0){
+            $avg3 = $total3/$k;
+        }else{
+            $avg3 = 0;
+        }
+        if($total4!=0){
+            $avg4 = $total4/$l;
+        }else{
+            $avg4 = 0;
+        }
+        if($total5!=0){
+            $avg5 = $total5/$m;
+        }else{
+            $avg5 = 0;
+        }
+        if($total6!=0){
+            $avg6 = $total6/$n;
+        }else{
+            $avg6 = 0;
+        }
+        if($total7!=0){
+            $avg7 = $total7/$o;
+        }else{
+            $avg7 = 0;
+        }
+        if($total8!=0){
+            $avg8 = $total8/$p;
+        }else{
+            $avg8 = 0;
+        }
+        if($total9!=0){
+            $avg9 = $total9/$q;
+        }else{
+            $avg9 = 0;
+        }
+        if($total10!=0){
+            $avg10 = $total10/$r;
+        }else{
+            $avg10 = 0;
+        }
+
+
+
+
+
+
         $data = PloGeneration::where('course_code',$request->course_code)->get();
 
         return view('plo_generation.plo_table')
         ->with('datas',$data)
+        ->with('ploData',$ploData)
+        ->with('avg1',$avg1)
+        ->with('avg2',$avg2)
+        ->with('avg3',$avg3)
+        ->with('avg4',$avg4)
+        ->with('avg5',$avg5)
+        ->with('avg6',$avg6)
+        ->with('avg7',$avg7)
+        ->with('avg8',$avg8)
+        ->with('avg9',$avg9)
+        ->with('avg10',$avg10)
+
         ->with('course_code',$request->course_code);
 
     }
+    public function Clocreate($data)
+    {
+        dd($data);
+        //$data = PloGeneration::where('course_code',$request->course_code)->get();
+
+        return view('clo_generation.create');
+
+    }
+    public function CloSave(Request $request)
+    {
+      //  return $request->all();
+        $i=0;
+        $datas  = [];
+        //$data = PloGeneration::where('course_code',$request->course_code)->get();
+        foreach($request['clo_id'] as $data){
+            $datas =[
+                'mark' => $request->marks[$i],
+                'clo_id' => $request->clo_id[$i],
+                'plo_id' => $request->plo_id[$i],
+                'course_id' => $request->course_id,
+                'marking_parameter' => $request->marking_parameter[$i],
+                'student_id' => $request->student_id[$i],
+            ];
+            MarksWithCloPlo::create($datas);
+            $i++;
+
+        }
+
+
+        return redirect()->to('/')->with('success','Data succesfully Added');
+
+    }
+
+
+
+
 }
