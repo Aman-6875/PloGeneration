@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">{{ $course_code }}</h4>
+                    <h4 class="mb-sm-0 font-size-18">{{ \App\Courses::find($course_code)->course_code }}</h4>
 
                      <div class="page-title-right">
                         <ol class="breadcrumb m-0">
@@ -24,14 +24,16 @@
         <div class="row">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">{{ $course_code }}</h4>
+                    <center>
+                        <h4 class="card-title mb-4">{{ \App\Courses::find($course_code)->course_code }}</h4>
+                    </center>
 
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-2">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered border-primary mb-0">
 
@@ -127,7 +129,88 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered border-primary mb-0">
 
+                                                    <thead>
+                                                    <tr>
+                                                        <th> Course Code</th>
+
+                                                        @for ($i=1;$i<=10;$i++)
+                                                            <th>PLO {{$i}}</th>
+                                                        @endfor
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    <tr>
+                                                        <td>GPA</td>
+
+
+                                                        <td>
+                                                            @if ($avg1!=0)
+                                                                {{ $total1 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg2!=0)
+                                                                {{ $total2 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg3!=0)
+                                                                {{ $total3 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg4!=0)
+                                                                {{ $total4 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg5!=0)
+                                                                {{ $total5 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg6!=0)
+                                                                {{ $total6 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg7!=0)
+                                                                {{ $total7 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg8!=0)
+                                                                {{ $total8 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg9!=0)
+                                                                {{ $total9 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($avg10!=0)
+                                                                {{ $total10 }}
+                                                            @endif
+                                                        </td>
+
+
+
+                                                    </tr>
+
+
+
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                         {{-- <div class="col-md-10">
                                             <div class="table-responsive">
@@ -854,98 +937,14 @@
 
 
                                     </div>
-
-
-
                                 </div>
-                                <canvas id="marksChart" width="600" height="400"></canvas>
-
-
-                                <div class="col-md-10">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered border-primary mb-0">
-
-                                            <thead>
-                                                <tr>
-                                                    <th> Course Code</th>
-
-                                                    @for ($i=1;$i<=10;$i++)
-                                                    <th>PLO {{$i}}</th>
-                                                    @endfor
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td>{{ $course_code }}</td>
-
-
-                                                    <td>
-                                                        @if ($avg1!=0)
-                                                         {{ $total1 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg2!=0)
-                                                         {{ $total2 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg3!=0)
-                                                         {{ $total3 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg4!=0)
-                                                         {{ $total4 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg5!=0)
-                                                         {{ $total5 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg6!=0)
-                                                         {{ $total6 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg7!=0)
-                                                         {{ $total7 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg8!=0)
-                                                         {{ $total8 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg9!=0)
-                                                         {{ $total9 }}
-                                                        @endif
-                                                     </td>
-                                                     <td>
-                                                        @if ($avg10!=0)
-                                                         {{ $total10 }}
-                                                        @endif
-                                                     </td>
-
-
-
-                                                </tr>
-
-
-
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <canvas id="marksChart2" width="600" height="400"></canvas>
-
+{{--                                <canvas id="marksChart2" width="600" height="400"></canvas>--}}
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <canvas id="marksChart" width="600" height="400"></canvas>
                         </div>
                     </div>
                 </div>
