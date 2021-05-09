@@ -34,12 +34,14 @@
                                 <div class="row mb-4">
                                     <label for="horizontal-email-input" class="col-sm-3 col-form-label">Choose Course Code</label>
                                     <div class="col-sm-9">
-                                        <select class="form-select" name="course_code">
+                                        <select
+
+                                            class="form-select course-code"
+                                            name="course_code">
                                             <option value="">SELECT</option>
-                                            <option value="ENG-11">ENG-11</option>
-                                            <option value="LIT-11">LIT-11</option>
-                                            <option value="CF-11">CF-11</option>
-                                            <option value="C-11">C-11</option>
+                                            @foreach($courses as $course)
+                                                <option value="{{$course->id}}">{{$course->course_code}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -67,5 +69,6 @@
     </div>
     <!-- container-fluid -->
 </div>
+
 
 @endsection

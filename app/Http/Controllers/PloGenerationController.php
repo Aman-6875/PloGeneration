@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Clo;
 use App\CloGeneration;
 use App\CloPloEngagement;
+use App\Courses;
 use App\MarkingDistribution;
 use App\MarkingParameter;
 use App\MarksWithCloPlo;
 use App\Plo;
 use App\PloGeneration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PloGenerationController extends Controller
@@ -32,7 +34,9 @@ class PloGenerationController extends Controller
      */
     public function create()
     {
-        return view('plo_generation.create');
+        $courses = Courses::all();
+        return view('plo_generation.create')
+            ->with('courses',$courses);
     }
     public function createCloGeneration(Request $request)
     {
@@ -238,7 +242,10 @@ class PloGenerationController extends Controller
     }
     public function ploTableSearch()
     {
-        return view('plo_generation.plo_table_search');
+        $user = Auth::user();
+        $courses = $user->courses;
+        return view('plo_generation.plo_table_search')
+            ->with('courses',$courses);
     }
     public function ploTableDataGet(Request $request)
     {
