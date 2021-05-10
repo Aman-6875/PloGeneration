@@ -28,6 +28,8 @@
                         <h4 class="card-title mb-4">{{ \App\Courses::find($course_code)->course_code }}</h4>
                     </center>
 
+
+
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card">
@@ -56,6 +58,91 @@
                                                     <tr>
 
 
+                                                        @foreach ($ploData as $item)
+                                                        @php
+                                                         $i=0;
+        $j=0;
+        $k=0;
+        $l=0;
+        $m=0;
+        $n=0;
+        $o=0;
+        $p=0;
+        $q=0;
+        $r=0;
+        $total1=0;
+        $total2=0;
+        $total3=0;
+        $total4=0;
+        $total5=0;
+        $total6=0;
+        $total7=0;
+        $total8=0;
+        $total9=0;
+        $total10=0;
+                                                            foreach($ploData as $data){
+
+                                                                if($data->plo_id!=null){
+                                                                    if($data->plo_id==1){
+                                                                        $total1 = $total1 +$data->mark;
+                                                                        $i++;
+                                                                    }
+                                                                    elseif($data->plo_id==2){
+                                                                        $total2 = $total2 + $data->mark;
+                                                                        $j++;
+                                                                    }
+                                                                    elseif($data->plo_id==3){
+                                                                        $total3 = $total3 +$data->mark;
+                                                                        $k++;
+                                                                    }
+                                                                    elseif($data->plo_id==4){
+                                                                        $total4 = $total4 +$data->mark;
+                                                                        $l++;
+                                                                    }
+                                                                    elseif($data->plo_id==5){
+                                                                        $total5 = $total5 + $data->mark;
+                                                                        $m++;
+                                                                    }
+                                                                    elseif($data->plo_id==6){
+                                                                        $total6 = $total6 + $data->mark;
+                                                                        $n++;
+                                                                    }
+                                                                    elseif($data->plo_id==7){
+                                                                        $total7 = $total7 + $data->mark;
+                                                                        $o++;
+                                                                    }
+                                                                    elseif($data->plo_id==8){
+                                                                        $total8 = $total8 +$data->mark;
+                                                                        $p++;
+                                                                    }
+                                                                    elseif($data->plo_id==9){
+                                                                        $total9 = $total9 +$data->mark;
+                                                                        $q++;
+                                                                    }
+                                                                    elseif($data->plo_id==10){
+                                                                        $total10 = $total10 + $data->mark;
+                                                                        $r++;
+                                                                    }
+
+                                                                }
+
+                                                            }
+                                                            // dd($total1);
+                                                            dd($total2);
+
+                                                        @endphp
+                                                        @endforeach
+                                                        <td>{{ $item->first_name }}</td>
+                                                        <td>{{ $total1 }}</td>
+                                                        <td>{{ $total2 }}</td>
+                                                        <td>{{ $total3 }}</td>
+                                                        <td>{{ $total4 }}</td>
+                                                        <td>{{ $total5 }}</td>
+                                                        <td>{{ $total6 }}</td>
+                                                        <td>{{ $total7 }}</td>
+                                                        <td>{{ $total8 }}</td>
+                                                        <td>{{ $total9 }}</td>
+                                                        <td>{{ $total10 }}</td>
 
 
 
@@ -802,11 +889,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <canvas id="marksChart" width="600" height="400"></canvas>
-                        </div>
-                    </div>
+
                 </div>
                 <!-- end card body -->
             </div>
@@ -818,53 +901,6 @@
 <script>
 
 
-    var marksCanvas = document.getElementById("marksChart");
-    var marksCanvas2 = document.getElementById("marksChart2");
-    var avg1 = "<?php echo $avg1; ?>";
-    var avg2 = "<?php echo $avg2; ?>";
-    var avg3 = "<?php echo $avg3; ?>";
-    var avg4 = "<?php echo $avg4; ?>";
-    var avg5 = "<?php echo $avg5; ?>";
-    var avg6 = "<?php echo $avg6; ?>";
-    var avg7 = "<?php echo $avg7; ?>";
-    var avg7 = "<?php echo $avg7; ?>";
-    var avg8 = "<?php echo $avg8; ?>";
-    var avg9 = "<?php echo $avg9; ?>";
-    var avg10 = "<?php echo $avg10; ?>";
-
-    var total1 = "<?php echo $total1; ?>";
-    var total2 = "<?php echo $total2; ?>";
-    var total3 = "<?php echo $total3; ?>";
-    var total4 = "<?php echo $total4; ?>";
-    var total5 = "<?php echo $total5; ?>";
-    var total6 = "<?php echo $total6; ?>";
-    var total7 = "<?php echo $total7; ?>";
-    var total7 = "<?php echo $total7; ?>";
-    var total8 = "<?php echo $total8; ?>";
-    var total9 = "<?php echo $total9; ?>";
-    var total10 = "<?php echo $total10; ?>";
-
-    var marksData = {
-    labels: ["PLO1", "PLO2", "PLO3", "PLO4", "PLO5", "PLO6","PLO7","PLO8","PLO9","PLO10"],
-    datasets: [{
-        label: "GPA",
-        backgroundColor: "rgba(200,0,0,0.2)",
-        data: [avg1, avg2, avg3, avg4, avg5, avg6,avg7,avg8,avg9,avg10]
-    }, {
-        label: "CGPA",
-        backgroundColor: "rgba(0,0,200,0.2)",
-        data: [total1, total2, total3, total4, total5, total6,total7,total8,total9,total10]
-    }]
-    };
-
-var radarChart = new Chart(marksCanvas, {
-  type: 'radar',
-  data: marksData
-});
-var radarChart2 = new Chart(marksCanvas2, {
-  type: 'radar',
-  data: marksData
-});
 </script>
 
 @endsection

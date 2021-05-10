@@ -282,7 +282,7 @@ class PloGenerationController extends Controller
         $ploData = MarksWithCloPlo::where('course_id',$request->course_code)->where('student_id',$id)->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->select('marks_with_clo_plos.*','plos.name')->get();
 
         }else{
-      return  $ploData = MarksWithCloPlo::where('course_id',$request->course_code)->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->join('users','marks_with_clo_plos.student_id','=','users.user_id')->select('marks_with_clo_plos.*','plos.name','users.first_name')->get();
+        $ploData = MarksWithCloPlo::where('course_id',$request->course_code)->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->join('users','marks_with_clo_plos.student_id','=','users.user_id')->select('marks_with_clo_plos.*','plos.name','users.first_name')->get();
 
         }
         //return $request->course_code;
