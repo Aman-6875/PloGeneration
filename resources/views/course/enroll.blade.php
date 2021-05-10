@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">ADD PLO</h4>
+                        <h4 class="mb-sm-0 font-size-18">ADD Course</h4>
 
                         {{-- <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-body">
                         <center>
-                            <h4 class="card-title mb-4">PLO GENERATION</h4>
+                            <h4 class="card-title mb-4">Enrollment</h4>
                         </center>
 
                         <form action="{{route('post.enroll.course')}}" method="POST" enctype="multipart/form-data">
@@ -81,7 +81,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-12">
                                     <center>
-                                        <button type="submit" class="btn btn-primary w-md">SELECT THE WEIGHTAGE FOR THE COURSE</button>
+                                        <button type="submit" class="btn btn-primary w-md">Submit</button>
                                     </center>
                                 </div>
                             </div>

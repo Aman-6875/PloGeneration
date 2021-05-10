@@ -139,16 +139,16 @@
                                                         @endphp
 
                                                         <td>{{ $item->first_name }}</td>
-                                                        <td>{{ $total1 }}</td>
-                                                        <td>{{ $total2 }}</td>
-                                                        <td>{{ $total3 }}</td>
-                                                        <td>{{ $total4 }}</td>
-                                                        <td>{{ $total5 }}</td>
-                                                        <td>{{ $total6 }}</td>
-                                                        <td>{{ $total7 }}</td>
-                                                        <td>{{ $total8 }}</td>
-                                                        <td>{{ $total9 }}</td>
-                                                        <td>{{ $total10 }}</td>
+                                                        <td>{{ $total1/10 }}</td>
+                                                        <td>{{ $total2/10 }}</td>
+                                                        <td>{{ $total3/10 }}</td>
+                                                        <td>{{ $total4/10 }}</td>
+                                                        <td>{{ $total5/10 }}</td>
+                                                        <td>{{ $total6/10 }}</td>
+                                                        <td>{{ $total7/10 }}</td>
+                                                        <td>{{ $total8/10 }}</td>
+                                                        <td>{{ $total9/10 }}</td>
+                                                        <td>{{ $total10/10 }}</td>
 
 
 
