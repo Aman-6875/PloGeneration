@@ -52,21 +52,17 @@
                                                     @php
                                                          $student = App\User::all()
                                                     @endphp
+                                                    @foreach ($student as $item)
                                                     <tr>
-                                                        @foreach ($ploData as $item)
-                                                        <tr>
-                                                            @php
-                                                                $student = App\User::where('user_id',$item->student_id)->first();
-                                                            @endphp
-                                                            {{ $student->first_name }}
-                                                        </td>
-                                                        @endforeach
+
 
 
 
 
 
                                                     </tr>
+                                                    @endforeach
+
 
 
 

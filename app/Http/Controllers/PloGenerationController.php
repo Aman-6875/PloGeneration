@@ -11,6 +11,7 @@ use App\MarkingParameter;
 use App\MarksWithCloPlo;
 use App\Plo;
 use App\PloGeneration;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -434,26 +435,39 @@ class PloGenerationController extends Controller
     }
     public function CloSave(Request $request)
     {
-        return $request->all();
+        // return $request->all();
         $i=0;
 
         $datas  = [];
-        //$data = PloGeneration::where('course_code',$request->course_code)->get();
-        foreach($request['clo_id'] as $data){
-            if( $request->marking_parameter[$i] == "10")    {
-                dd($request->marking_parameter[10]);
-            }
-            $datas =[
-                'mark' => $request->marks[$i],
-                'clo_id' => $request->clo_id[$i],
-                'plo_id' => $request->plo_id[$i],
-                'course_id' => $request->course_id,
-                'marking_parameter' => $request->marking_parameter[$i],
-                'student_id' => $request->student_id[$i],
 
-            ];
-            // MarksWithCloPlo::create($datas);
-            $i++;
+        //$data = PloGeneration::where('course_code',$request->course_code)->get();
+        try{
+            foreach($request['clo_id'] as $data){
+                $totalFinalMark  =   $request->marks[$i] ==  null ?  0 :$request->marks[$i];
+                if( $request->marking_parameter[$i] == "10")    {
+
+                    $totalFinalMark  = $request->marks[$i] + $request->marks[$i+1]+$request->marks[$i+2]+$request->marks[$i+3]+$request->marks[$i+4]+$request->marks[$i+5];
+                    $i+=5;
+                }
+
+                $datas =[
+                    'mark' => $totalFinalMark,
+                    'clo_id' => $request->clo_id[$i],
+                    'plo_id' => $request->plo_id[$i],
+                    'course_id' => $request->course_id,
+                    'marking_parameter' => $request->marking_parameter[$i],
+                    'student_id' => $request->student_id[$i],
+
+                ];
+
+
+                MarksWithCloPlo::create($datas);
+                $i++;
+
+            }
+
+        }catch(Exception $e){
+        return redirect()->to('/')->with('success','Data succesfully Added');
 
         }
 
