@@ -75,7 +75,9 @@ class LoginController extends Controller
                 $user->is_admin = 1;
                // dd($user);
                 $user->save();
-                return back()->with('success', "Your Account has created Successfully. Please Login");
+                Auth::login($user);
+                return redirect('/');
+//                return back()->with('success', "Your Account has created Successfully. Please Login");
             } catch (\Exception $exception) {
                 return back()->with('failed', $exception->getMessage());
             }
