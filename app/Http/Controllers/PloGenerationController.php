@@ -434,11 +434,15 @@ class PloGenerationController extends Controller
     }
     public function CloSave(Request $request)
     {
-      //  return $request->all();
+        return $request->all();
         $i=0;
+
         $datas  = [];
         //$data = PloGeneration::where('course_code',$request->course_code)->get();
         foreach($request['clo_id'] as $data){
+            if( $request->marking_parameter[$i] == "10")    {
+                dd($request->marking_parameter[10]);
+            }
             $datas =[
                 'mark' => $request->marks[$i],
                 'clo_id' => $request->clo_id[$i],
@@ -446,8 +450,9 @@ class PloGenerationController extends Controller
                 'course_id' => $request->course_id,
                 'marking_parameter' => $request->marking_parameter[$i],
                 'student_id' => $request->student_id[$i],
+
             ];
-            MarksWithCloPlo::create($datas);
+            // MarksWithCloPlo::create($datas);
             $i++;
 
         }

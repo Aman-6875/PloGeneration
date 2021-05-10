@@ -53,7 +53,17 @@
 
                                                                 $parameter_name =  App\MarkingParameter::where('id',$marking_parameter)->first();
                                                              @endphp
-                                                              <th>{{$parameter_name->name}}</th>
+                                                            @if ($parameter_name->id == 10)
+                                                            @for ($k=1;$k<=6;$k++){
+                                                                <th>{{$parameter_name->name}}.{{ $k }}</th>
+                                                            }
+                                                            @endfor
+
+                                                            @else
+                                                            <th>{{$parameter_name->name}}</th>
+                                                            @endif
+
+
 
                                                            @endif
 
@@ -75,168 +85,128 @@
                                                     <td>{{ $student->first_name }}</td>
                                                     @foreach($datas[0]['marking_parameter'] as $marking_parameter)
                                                     @if ($marking_parameter!= null)
-                                                    <td>
+                                                    @if($marking_parameter == 10)
+                                                    @for($j=0; $j<6; $j++)
+                                                             <td>
+                                                                 @foreach ($datas as $clo_index => $data)
+                                                                     <input
+                                                                         id="clo-{{$student->id}}-{{$data['clo_id']}}"
+                                                                         class="form-control"
+                                                                         type="number"
+                                                                         name="marks[]"
+                                                                         placeholder="{{"CLO-".$data['clo_id']}}"
+                                                                         onchange="adjustTotal({{$student->id}},{{$data['clo_id']}},{{$marking_parameter}},{{json_encode($data)}})"
+                                                                     <?php
+                                                                         $marking_parameter_index = array_search($marking_parameter,$data['marking_parameter']);
+                                                                         $given_mark = $data['input_number'][$marking_parameter_index];
+                                                                         if (!$given_mark) echo 'readonly';
+                                                                         ?>
+                                                                     ><br>
+                                                                     <input class="form-control" type="hidden"name="clo_id[]" value="{{$data['clo_id']}}">
+                                                                     <input class="form-control" type="hidden"name="plo_id[]" value="{{$data['plo_id']}}">
+                                                                     <input class="form-control" type="hidden"name="course_id" value="{{ $data['course_id'] }}">
+                                                                     <input class="form-control" type="hidden"name="marking_parameter[]" value="{{ $marking_parameter }}">
+                                                                     <input class="form-control" type="hidden"name="student_id[]" value="{{ $student->user_id }}">
+                                                                     @php
+                                                                         $i++;
+                                                                     @endphp
+                                                                 @endforeach
+                                                             </td>
+                                                     @endfor
+                                                 @else
+                                                         <td>
+                                                             @foreach ($datas as $clo_index => $data)
+                                                                 <input
+                                                                     id="clo-{{$student->id}}-{{$data['clo_id']}}"
+                                                                     class="form-control"
+                                                                     type="number"
+                                                                     name="marks[]"
+                                                                     placeholder="{{"CLO-".$data['clo_id']}}"
+                                                                     onchange="adjustTotal({{$student->id}},{{$data['clo_id']}},{{$marking_parameter}},{{json_encode($data)}})"
+                                                                 <?php
+                                                                     $marking_parameter_index = array_search($marking_parameter,$data['marking_parameter']);
+                                                                     $given_mark = $data['input_number'][$marking_parameter_index];
+                                                                     if (!$given_mark) echo 'readonly';
+                                                                     ?>
+                                                                 ><br>
+                                                                 <input class="form-control" type="hidden"name="clo_id[]" value="{{$data['clo_id']}}">
+                                                                 <input class="form-control" type="hidden"name="plo_id[]" value="{{$data['plo_id']}}">
+                                                                 <input class="form-control" type="hidden"name="course_id" value="{{ $data['course_id'] }}">
+                                                                 <input class="form-control" type="hidden"name="marking_parameter[]" value="{{ $marking_parameter }}">
+                                                                 <input class="form-control" type="hidden"name="student_id[]" value="{{ $student->user_id }}">
+                                                                 @php
+                                                                     $i++;
+                                                                 @endphp
+                                                             @endforeach
+                                                         </td>
+                                                @endif
 
-<<<<<<< HEAD
-                                                        @foreach ($datas as $data)
-                                                         {{-- @dd($data); --}}
-                                                         @if ($data->marking_parameter[$i]!='10')
-                                                            id="clo-{{$student->id}}-{{$data['clo_id']}}"
-                                                            class="form-control"
-                                                            type="number"
-                                                            name="marks[]"
-                                                            placeholder="CLO{{$data['clo_id'] }}"
-                                                             onchange="adjustTotal({{$student->id}},{{$data['clo_id']}})"><br>
-                                                         @else
-                                                             aaaaaaa
-                                                         @endif
-                                                            {{-- <input
-=======
-                                                        @foreach ($datas as $clo_index => $data)
-                                                            <input
->>>>>>> b339cf0e226b7955d792f43c1157f644a0050d52
-                                                                id="clo-{{$student->id}}-{{$data['clo_id']}}"
-                                                                class="form-control"
-                                                                type="number"
-                                                                name="marks[]"
-<<<<<<< HEAD
-                                                                placeholder="CLO{{$data['clo_id'] }}"
-                                                            onchange="adjustTotal({{$student->id}},{{$data['clo_id']}})"><br> --}}
-                                                            <input class="form-control" type="hidden"name="clo_id[]" value="{{$data['clo_id']}}">
-                                                            <input class="form-control" type="hidden"name="plo_id[]" value="{{$data['plo_id']}}">
-                                                            <input class="form-control" type="hidden"name="course_id" value="{{ $data['course_id'] }}">
-                                                            <input class="form-control" type="hidden"name="marking_parameter[]" value="{{ $marking_parameter }}">
-                                                            <input class="form-control" type="hidden"name="student_id[]" value="{{ $student->user_id }}">
-                                                            @php
-                                                                $i++;
-                                                            @endphp
-                                                        @endforeach
-                                                    </td>
                                                     @endif
-                                                    @endforeach
-                                                     <td>
-                                                         @foreach ($datas as $d)
-                                                         <input
-                                                             class="form-control"
-                                                             id="total-{{$student->id}}-{{$d['clo_id']}}"
-                                                             type="number" readonly><br>
-                                                         @endforeach
-                                                     </td>
-                                                </tr>
                                                  @endforeach
-=======
-                                                                placeholder="{{"CLO-".$data['clo_id']}}"
-                                                            onchange="adjustTotal({{$student->id}},{{$data['clo_id']}},{{$marking_parameter}},{{json_encode($data)}})"
-                                                            <?php
-                                                                $marking_parameter_index = array_search($marking_parameter,$data['marking_parameter']);
-                                                                $given_mark = $data['input_number'][$marking_parameter_index];
-                                                                if (!$given_mark) echo 'readonly';
-                                                            ?>
-                                                            ><br>
-<input class="form-control" type="hidden"name="clo_id[]" value="{{$data['clo_id']}}">
-<input class="form-control" type="hidden"name="plo_id[]" value="{{$data['plo_id']}}">
-<input class="form-control" type="hidden"name="course_id" value="{{ $data['course_id'] }}">
-<input class="form-control" type="hidden"name="marking_parameter[]" value="{{ $marking_parameter }}">
-<input class="form-control" type="hidden"name="student_id[]" value="{{ $student->user_id }}">
-@php
-    $i++;
-@endphp
-@endforeach
-</td>
-@endif
-@endforeach
-<td>
-@foreach ($datas as $d)
-<input
- class="form-control"
- id="total-{{$student->id}}-{{$d['clo_id']}}"
- type="number" readonly><br>
-@endforeach
-</td>
-</tr>
-@endforeach
->>>>>>> b339cf0e226b7955d792f43c1157f644a0050d52
+                                        <td>
+                                        @foreach ($datas as $d)
+                                        <input
+                                        class="form-control"
+                                        id="total-{{$student->id}}-{{$d['clo_id']}}"
+                                        type="number" readonly><br>
+                                        @endforeach
+                                        </td>
+                                        </tr>
+                                        @endforeach
 
 
 
 
 
-<<<<<<< HEAD
-                                                </tbody>
-                                            </table>
+                                        </tbody>
+                                        </table>
                                         </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col-sm-9">
-                                <center>
-                                    <button type="submit" class="btn btn-primary w-50">Save</button>
-                                </center>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- end card body -->
-            </div>
-        </div>
-        <!-- end row -->
-    </div>
-    <!-- container-fluid -->
-=======
-</tbody>
-</table>
-</div>
+                                        <div class="row justify-content-center">
+                                        <div class="col-sm-9">
+                                        <center>
+                                        <button type="submit" class="btn btn-primary w-50">Save</button>
+                                        </center>
+                                        </div>
+                                        </div>
+                                        </form>
+                                        </div>
+                                        <!-- end card body -->
+                                        </div>
+                                        </div>
+                                        <!-- end row -->
+                                        </div>
+                                        <!-- container-fluid -->
+                                        </div>
 
-</div>
-</div>
-</div>
-</div>
+                            <script>
+                            function adjustTotal(student_id,id,marking_parameter,data){
+                            let element_value = document.getElementById('clo-'+student_id+'-'+id)
+                            let element_total = document.getElementById('total-'+student_id+'-'+id)
+                                let is_okay = cloValidation(marking_parameter,data,parseFloat(element_value.value))
+                                if (!is_okay) element_value.value = ''
+                            let total_value = parseFloat(element_total.value)
+                            if (isNaN(total_value)) total_value = 0
+                            total_value+= parseFloat(element_value.value)
+                            element_total.value = total_value
+                            }
 
-<div class="row justify-content-center">
-<div class="col-sm-9">
-<center>
-<button type="submit" class="btn btn-primary w-50">Save</button>
-</center>
-</div>
-</div>
-</form>
-</div>
-<!-- end card body -->
-</div>
-</div>
-<!-- end row -->
-</div>
-<!-- container-fluid -->
->>>>>>> b339cf0e226b7955d792f43c1157f644a0050d52
-</div>
+                            function cloValidation(marking_parameter,data,value)
+                            {
+                                let marking_parameters = data.marking_parameter
+                                let input_numbers = data.input_number
+                                let marking_param_index = marking_parameters.indexOf(String(marking_parameter))
+                                if (value > input_numbers[marking_param_index]){
+                                    alert('Value can not be greater than '+ input_numbers[marking_param_index]);
+                                    return false
+                                }
+                                return true
 
-<script>
-function adjustTotal(student_id,id,marking_parameter,data){
-let element_value = document.getElementById('clo-'+student_id+'-'+id)
-let element_total = document.getElementById('total-'+student_id+'-'+id)
-    let is_okay = cloValidation(marking_parameter,data,parseFloat(element_value.value))
-    if (!is_okay) element_value.value = ''
-let total_value = parseFloat(element_total.value)
-if (isNaN(total_value)) total_value = 0
-total_value+= parseFloat(element_value.value)
-element_total.value = total_value
-}
-
-function cloValidation(marking_parameter,data,value)
-{
-    let marking_parameters = data.marking_parameter
-    let input_numbers = data.input_number
-    let marking_param_index = marking_parameters.indexOf(String(marking_parameter))
-    if (value > input_numbers[marking_param_index]){
-        alert('Value can not be greater than '+ input_numbers[marking_param_index]);
-        return false
-    }
-    return true
-
-}
-</script>
-@endsection
+                            }
+                            </script>
+                            @endsection
