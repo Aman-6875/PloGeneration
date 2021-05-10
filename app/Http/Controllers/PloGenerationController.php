@@ -243,7 +243,12 @@ class PloGenerationController extends Controller
     public function ploTableSearch()
     {
         $user = Auth::user();
-        $courses = $user->courses;
+        if(Auth::user()->user_role=='Student'){
+            $courses = $user->courses;
+        }else{
+            $courses =Courses::all();
+        }
+
         return view('plo_generation.plo_table_search')
             ->with('courses',$courses);
     }
@@ -272,7 +277,13 @@ class PloGenerationController extends Controller
         $total9=0;
         $total10=0;
         $id = Auth::user()->user_id;
+        if(Auth::user()->user_role=='Student'){
         $ploData = MarksWithCloPlo::where('course_id',$request->course_code)->where('student_id',$id)->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->select('marks_with_clo_plos.*','plos.name')->get();
+
+        }else{
+      return  $ploData = MarksWithCloPlo::where('course_id',$request->course_code)->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->join('users','marks_with_clo_plos.student_id','=','users.user_id')->select('marks_with_clo_plos.*','plos.name','users.first_name')->get();
+
+        }
         //return $request->course_code;
         foreach($ploData as $data){
             if($data->plo_id!=null){
@@ -377,32 +388,40 @@ class PloGenerationController extends Controller
 
 
     //   return  $data = PloGeneration::where('course_code',$request->course_code)->get();
-         $total3;
-        return view('plo_generation.plo_table')
+        //  $total3;
+        if(Auth::user()->user_role=='Student'){
+            return view('plo_generation.plo_table')
 
-        ->with('ploData',$ploData)
-        ->with('avg1',$avg1)
-        ->with('avg2',$avg2)
-        ->with('avg3',$avg3)
-        ->with('avg4',$avg4)
-        ->with('avg5',$avg5)
-        ->with('avg6',$avg6)
-        ->with('avg7',$avg7)
-        ->with('avg8',$avg8)
-        ->with('avg9',$avg9)
-        ->with('avg10',$avg10)
-        ->with('total1',$total1)
-        ->with('total2',$total2)
-        ->with('total3',$total3)
-        ->with('total4',$total4)
-        ->with('total5',$total5)
-        ->with('total6',$total6)
-        ->with('total7',$total7)
-        ->with('total8',$total8)
-        ->with('total9',$total9)
-        ->with('total10',$total10)
+            ->with('ploData',$ploData)
+            ->with('avg1',$avg1)
+            ->with('avg2',$avg2)
+            ->with('avg3',$avg3)
+            ->with('avg4',$avg4)
+            ->with('avg5',$avg5)
+            ->with('avg6',$avg6)
+            ->with('avg7',$avg7)
+            ->with('avg8',$avg8)
+            ->with('avg9',$avg9)
+            ->with('avg10',$avg10)
+            ->with('total1',$total1)
+            ->with('total2',$total2)
+            ->with('total3',$total3)
+            ->with('total4',$total4)
+            ->with('total5',$total5)
+            ->with('total6',$total6)
+            ->with('total7',$total7)
+            ->with('total8',$total8)
+            ->with('total9',$total9)
+            ->with('total10',$total10)
 
-        ->with('course_code',$request->course_code);
+            ->with('course_code',$request->course_code);
+
+        }else{
+
+            return view('plo_generation.plo_table_all_data')
+            ->with('course_code',$request->course_code)
+            ->with('ploData',$ploData);
+        }
 
     }
     public function Clocreate($data)

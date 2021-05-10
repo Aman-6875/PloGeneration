@@ -11,9 +11,9 @@
                     <h4 class="mb-sm-0 font-size-18">{{ $course_code }}</h4>
 
                      <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
+                        {{-- <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="/plo-generation">All PLO</a></li>
-                        </ol>
+                        </ol> --}}
                     </div>
 
                 </div>

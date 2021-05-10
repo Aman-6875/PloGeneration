@@ -78,12 +78,24 @@
                                                     <td>
 
                                                         @foreach ($datas as $data)
-                                                            <input
+                                                         {{-- @dd($data); --}}
+                                                         @if ($data->marking_parameter[$i]!='10')
+                                                            id="clo-{{$student->id}}-{{$data['clo_id']}}"
+                                                            class="form-control"
+                                                            type="number"
+                                                            name="marks[]"
+                                                            placeholder="CLO{{$data['clo_id'] }}"
+                                                             onchange="adjustTotal({{$student->id}},{{$data['clo_id']}})"><br>
+                                                         @else
+                                                             aaaaaaa
+                                                         @endif
+                                                            {{-- <input
                                                                 id="clo-{{$student->id}}-{{$data['clo_id']}}"
                                                                 class="form-control"
                                                                 type="number"
                                                                 name="marks[]"
-                                                            onchange="adjustTotal({{$student->id}},{{$data['clo_id']}})"><br>
+                                                                placeholder="CLO{{$data['clo_id'] }}"
+                                                            onchange="adjustTotal({{$student->id}},{{$data['clo_id']}})"><br> --}}
                                                             <input class="form-control" type="hidden"name="clo_id[]" value="{{$data['clo_id']}}">
                                                             <input class="form-control" type="hidden"name="plo_id[]" value="{{$data['plo_id']}}">
                                                             <input class="form-control" type="hidden"name="course_id" value="{{ $data['course_id'] }}">

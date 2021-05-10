@@ -20,7 +20,8 @@
                 </div>
             </div>
             <!-- end page title -->
-
+            {{-- @dd(Auth::user()->user_role); --}}
+            @if (Auth::user()->user_role=='Student')
             <div class="row">
                 <div class="card">
                     <div class="card-body">
@@ -69,6 +70,8 @@
                 </div>
 
             </div>
+            @endif
+
             <!-- end row -->
             <br><br>
             <div class="row">

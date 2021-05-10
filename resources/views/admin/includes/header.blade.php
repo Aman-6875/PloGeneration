@@ -5,10 +5,10 @@
             <div class="navbar-brand-box">
                 <a href="/" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="/assets/images/logo-light.svg" alt="" height="22">
+                        <img src="/nilai-university.png" alt="" height="19">
                     </span>
                     <span class="logo-lg">
-                        <img src="/assets/images/logo-light.png" alt="" height="19">
+                        <img src="/nilai-university.png" alt="" height="50">
                     </span>
                 </a>
             </div>

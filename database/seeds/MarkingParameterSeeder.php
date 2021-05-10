@@ -12,11 +12,8 @@ class MarkingParameterSeeder extends Seeder
     public function run()
     {
         $params = [
-            'Assignment 1',
-            'Assignment 2',
-            'Quiz 1',
-            'Quiz 2',
-            'Final Exam'
+            'Assignment 1', 'Assignment 2',
+            'Assignment 3',  'Quiz 1', 'Quiz 2', 'Quiz 3', 'Quiz 4', 'Lab Test', 'Class Test', 'Final Exam', 'Project Report', 'Report', 'Presentation', 'Demo', 'Others'
         ];
        foreach ($params as $param){
            \App\MarkingParameter::create([

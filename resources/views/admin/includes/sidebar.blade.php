@@ -11,7 +11,7 @@
         </li>
         @if (Auth::user()->user_role!='Student')
         @if (Auth::user()->user_type==1)
-        <li>
+        {{-- <li>
             <a href="#" class="has-arrow waves-effect">
                 <i class="bx bx-layout"></i>
                 <span key="t-layouts">Manage User</span>
@@ -25,7 +25,7 @@
                     <a href="/users" key="t-horizontal">All Users</a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         @endif
 
 

@@ -11,9 +11,9 @@
                     <h4 class="mb-sm-0 font-size-18">{{ \App\Courses::find($course_code)->course_code }}</h4>
 
                      <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
+                        {{-- <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="/plo-generation">All PLO</a></li>
-                        </ol>
+                        </ol> --}}
                     </div>
 
                 </div>
@@ -33,110 +33,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered border-primary mb-0">
 
-                                                    <thead>
-                                                        <tr>
-                                                            <th>GPA</th>
-                                                            <td>
-                                                                @php
-                                                                 $gpa = ($total1+$total2+$total2+$total4+$total5+$total6+$total7+$total8+$total9+$total10);
-                                                                @endphp
-
-
-                                                            @if($gpa>=90)
-                                                                @php
-                                                                    $grade1=4;
-                                                                @endphp
-                                                                {{ $grade1 }}
-                                                            @elseif($gpa>=80 && $gpa<90)
-                                                                    @php
-                                                                        $grade1=4;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=75 && $gpa<90)
-                                                                    @php
-                                                                        $grade1=3.7;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-
-                                                            @elseif($gpa>=70 && $gpa<75)
-                                                                    @php
-                                                                        $grade1=3.4;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=65 && $gpa<70)
-                                                                    @php
-                                                                        $grade1=3.1;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=60 && $gpa<65)
-                                                                    @php
-                                                                        $grade1=2.7;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=55 && $gpa<60)
-                                                                    @php
-                                                                        $grade1=2.4;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=50 && $gpa<55)
-                                                                    @php
-                                                                        $grade1=2.1;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=45 && $gpa<50)
-                                                                    @php
-                                                                        $grade1=1.7;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=40 && $gpa<45)
-                                                                    @php
-                                                                        $grade1=1.4;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @elseif($gpa>=35 && $gpa<40)
-                                                                    @php
-                                                                        $grade1=1;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                            @else
-                                                                    @php
-                                                                        $grade1=0;
-                                                                    @endphp
-                                                                    {{ $grade1 }}
-                                                             @endif
-
-
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>CGPA</th>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-
-
-
-
-
-
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10">
+                                        <div class="col-md-12">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered border-primary mb-0">
 
                                                     <thead>
                                                     <tr>
-                                                        <th> Course Code</th>
+                                                        <th> Student Name</th>
 
                                                         @for ($i=1;$i<=10;$i++)
                                                             <th>PLO {{$i}}</th>
@@ -144,61 +48,21 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                        {{-- @dd($plo) --}}
+                                                    @php
+                                                         $student = App\User::all()
+                                                    @endphp
                                                     <tr>
-                                                        <td>GPA</td>
+                                                        @foreach ($ploData as $item)
+                                                        <tr>
+                                                            @php
+                                                                $student = App\User::where('user_id',$item->student_id)->first();
+                                                            @endphp
+                                                            {{ $student->first_name }}
+                                                        </td>
+                                                        @endforeach
 
 
-                                                        <td>
-                                                            @if ($avg1!=0)
-                                                                {{ $total1/10 }}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg2!=0)
-                                                                {{ $total2/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg3!=0)
-                                                                {{ $total3/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg4!=0)
-                                                                {{ $total4/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg5!=0)
-                                                                {{ $total5/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg6!=0)
-                                                                {{ $total6/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg7!=0)
-                                                                {{ $total7/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg8!=0)
-                                                                {{ $total8/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg9!=0)
-                                                                {{ $total9/10}}
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($avg10!=0)
-                                                                {{ $total10/10 }}
-                                                            @endif
-                                                        </td>
 
 
 

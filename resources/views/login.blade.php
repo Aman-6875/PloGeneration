@@ -6,7 +6,7 @@
 <head>
 
         <meta charset="utf-8" />
-        <title>Login | ThemeFisher - Admin & Dashboard</title>
+        <title>Login | Nilai University</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -37,28 +37,12 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
-                                        <img src="/assets/images/profile-img.png" alt="" class="img-fluid">
+                                        <img src="/nilai-university.png" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <div class="auth-logo">
-                                    <a href="index.html" class="auth-logo-light">
-                                        <div class="avatar-md profile-user-wid mb-4">
-                                            <span class="avatar-title rounded-circle bg-light">
-                                                <img src="/assets/images/logo-light.svg" alt="" class="rounded-circle" height="34">
-                                            </span>
-                                        </div>
-                                    </a>
 
-                                    <a href="#" class="auth-logo-dark">
-                                        <div class="avatar-md profile-user-wid mb-4">
-                                            <span class="avatar-title rounded-circle bg-light">
-                                                <img src="/assets/images/logo.svg" alt="" class="rounded-circle" height="34">
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
                                 <div class="p-2">
                                     @include('admin.includes.message')
                                     <form class="form-horizontal" action="/login-action" method="POST">
@@ -95,7 +79,7 @@
 
                             <div>
                                 <p>Don't have an account ? <a href="/register" class="fw-medium text-primary"> Signup now </a> </p>
-                                <p>© <script>document.write(new Date().getFullYear())</script> ThemeFisher<i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                                <p>© <script>document.write(new Date().getFullYear())</script> Nilai University<i class="mdi mdi-heart text-danger"></i> </p>
                             </div>
                         </div>
 

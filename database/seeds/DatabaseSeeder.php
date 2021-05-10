@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(CourseSeeder::class);
         $this->call(CLOSeeder::class);
         $this->call(PLOSeeder::class);
         $this->call(MarkingParameterSeeder::class);
