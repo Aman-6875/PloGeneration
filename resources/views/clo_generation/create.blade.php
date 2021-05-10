@@ -46,7 +46,7 @@
                                                              @endphp
                                                             @if ($parameter_name->id == 10)
                                                             @for ($k=1;$k<=6;$k++){
-                                                                <th>{{$parameter_name->name}}.{{ $k }}</th>
+                                                                <th>{{$parameter_name->name}}.Q-{{ $k }}</th>
                                                             }
                                                             @endfor
 
@@ -81,6 +81,7 @@
                                                              <td>
                                                                  @foreach ($datas as $clo_index => $data)
                                                                      <input
+
                                                                          id="clo-{{$student->id}}-{{$data['clo_id']}}"
                                                                          class="form-control"
                                                                          type="number"
@@ -108,6 +109,7 @@
                                                          <td>
                                                              @foreach ($datas as $clo_index => $data)
                                                                  <input
+                                                                        style="width: 70px"
                                                                      id="clo-{{$student->id}}-{{$data['clo_id']}}"
                                                                      class="form-control"
                                                                      type="number"

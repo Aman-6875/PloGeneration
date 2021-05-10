@@ -52,13 +52,19 @@
                                                     <tbody>
                                                         {{-- @dd($plo) --}}
                                                     @php
-                                                         $student = App\User::all()
+                                                         $student = App\User::where('user_role','Student')->get();
+                                                        //  @dd($student);
                                                     @endphp
                                                     @foreach ($student as $item)
                                                     <tr>
+                                                        {{-- @dd($item->user_id) --}}
+                                                        @php
+                                                             $ploData2 =   App\MarksWithCloPlo::where('course_id',$course_code)->where('student_id',$item->user_id)->join('plos','marks_with_clo_plos.plo_id','=','plos.id')->select('marks_with_clo_plos.*','plos.name')->get();
+                                                            // $ploData2 = App\MarksWithCloPlo::where('student_id',$item->user_id)->get();
+
+                                                        @endphp
 
 
-                                                        @foreach ($ploData as $item)
                                                         @php
                                                          $i=0;
         $j=0;
@@ -80,7 +86,7 @@
         $total8=0;
         $total9=0;
         $total10=0;
-                                                            foreach($ploData as $data){
+                                                            foreach($ploData2 as $data){
 
                                                                 if($data->plo_id!=null){
                                                                     if($data->plo_id==1){
@@ -128,10 +134,10 @@
 
                                                             }
                                                             // dd($total1);
-                                                            dd($total2);
+                                                            // dd($total2);
 
                                                         @endphp
-                                                        @endforeach
+
                                                         <td>{{ $item->first_name }}</td>
                                                         <td>{{ $total1 }}</td>
                                                         <td>{{ $total2 }}</td>
